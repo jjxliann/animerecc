@@ -3,7 +3,6 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required,current_user
 from .models import Anime
 from .search import search
-
 from .import db
 import json
 
