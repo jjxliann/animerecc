@@ -1,22 +1,11 @@
-{% extends "base.html" %} {% block title %}Changed{% endblock %}  
+{% extends "base.html" %}{% block title %}Changed{% endblock %}  
 
 {% block content%}
+
+
 <h1 align="center">Find Reccomendations</h1>
-<ul class="list-group list-group-flush" id="notes">
-    {% for anime in user.animes %}
-   <li class="list-group-item">{{anime.data}}
-    <button type ="button" class="close" onClick="deleteNote({{ anime.id }})">
-        <span aria-hidden="true">&times;</span>
-    </button>
-   </li> 
-    {% endfor %}
-</ul> 
-<form method ="POST">
-    
-    <textarea name ="anime" id = "anime" class="form-control"></textarea>
-    <br />
-        <div align="center">
-            <button type="submit" class="btn btn-primary">Find Similar Anime</button>
-        </div>
+<form method="POST">
+    <p>{{ reccs }}</p>
 </form>
+
 {% endblock %}
