@@ -4,16 +4,23 @@ from flask_login import login_required,current_user
 from .models import Anime
 from .search import search
 from .import db
+from itertools import chain
 import json
 
 
 views = Blueprint('views', __name__)
 
+global reccs
 
 
-@views.route('/home', methods=['GET', 'POST'])
+@views.route("/", methods=['GET', 'POST'])
 @login_required
 def home():
+    global reccs
+    if request.method == 'POST':
+         #reccs = request.form.get('reccs')
+         global anime
+         anime = request.form.get('anime')
     """if request.method =='POST':
         request.form(anime)
 
@@ -26,9 +33,12 @@ def home():
             db.session.add(new_anime)
             db.session.commit()
             flash('Searchin') """""
-    return render_template("home.html", user=current_user)
+    """new_anime = Anime(data=Anime,user_id=current_user.id)
+    db.session.add(new_anime)
+    db.session.commit()"""
+    return render_template("home.html", reccs = reccs, user=current_user)
     
-reccs={}
+
 @views.route("/serch", methods=['GET','POST'])
 def serch():
         if request.method =='POST':
@@ -36,8 +46,8 @@ def serch():
             anime = anime.lower()
             global reccs
             reccs = search(anime)
-            reccs = reccs.to_dict()
-            return redirect("/home",reccs)
+            #reccs = reccs.to_dict()
+            return redirect(url_for('views.home',reccs=reccs))
         else:
              return render_template("serch.html", user = current_user)
         

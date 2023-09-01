@@ -36,8 +36,21 @@ def search(anime):
     input_name = anime
     reccomendations = pd.DataFrame(df.nlargest(10,input_name)['Name'])
     reccomendations = reccomendations[reccomendations['Name']!= input_name]
+    suggestions = reccomendations.to_numpy()
+    shows =[]
+    for i in suggestions:
+        for j in i:
+            shows.append([j][0])
+    
+    print(shows)
+           
+    
 
-    return(reccomendations)
+    return(shows)
+
+search("nana")
+
+
 
 
 
