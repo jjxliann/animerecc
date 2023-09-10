@@ -40,15 +40,14 @@ def search(anime):
     shows =[]
     for i in suggestions:
         for j in i:
+            #([j][0]) = str([j][0])
             shows.append([j][0])
-    
-    print(shows)
-           
-    
+            
 
     return(shows)
 
-search("nana")
+
+
 
 
 

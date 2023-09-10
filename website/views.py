@@ -1,5 +1,5 @@
 
-from flask import Blueprint, render_template, request, flash, jsonify, redirect,url_for
+from flask import Blueprint, render_template, request, flash, jsonify, redirect,url_for, session
 from flask_login import login_required,current_user
 from .models import Anime
 from .search import search
@@ -17,11 +17,20 @@ global reccs
 @login_required
 def home():
     global reccs
+    reccs = session.get('reccs',None)
+    for recc in reccs:
+        print(type(recc))
+                                
     if request.method == 'POST':
-         #reccs = request.form.get('reccs')
-         global anime
-         anime = request.form.get('anime')
-    """if request.method =='POST':
+         animeName = request.form.get('reccName')
+         print(animeName)
+         new_anime = Anime(data=animeName,user_id=current_user.id)
+         db.session.add(new_anime)
+         db.session.commit()
+    return render_template("home.html", reccs = reccs, user=current_user)
+   
+
+"""if request.method =='POST':
         request.form(anime)
 
         if len(anime) <1:
@@ -33,10 +42,6 @@ def home():
             db.session.add(new_anime)
             db.session.commit()
             flash('Searchin') """""
-    """new_anime = Anime(data=Anime,user_id=current_user.id)
-    db.session.add(new_anime)
-    db.session.commit()"""
-    return render_template("home.html", reccs = reccs, user=current_user)
     
 
 @views.route("/serch", methods=['GET','POST'])
@@ -47,9 +52,14 @@ def serch():
             global reccs
             reccs = search(anime)
             #reccs = reccs.to_dict()
-            return redirect(url_for('views.home',reccs=reccs))
+            session['reccs'] = reccs
+            return redirect(url_for('views.home'))
         else:
              return render_template("serch.html", user = current_user)
+
+@views.route("/list",methods =['GET','POST'])
+def watchlist():
+     return render_template("list.html", user =current_user)
         
 
         
