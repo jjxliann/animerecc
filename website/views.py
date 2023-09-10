@@ -18,13 +18,11 @@ global reccs
 def home():
     global reccs
     reccs = session.get('reccs',None)
-    for recc in reccs:
-        print(type(recc))
                                 
     if request.method == 'POST':
-         animeName = request.form.get('reccName')
-         print(animeName)
-         new_anime = Anime(data=animeName,user_id=current_user.id)
+         anime = request.form.get('anime')
+         print(request.form.getlist('anime'))
+         new_anime = Anime(data=anime,user_id=current_user.id)
          db.session.add(new_anime)
          db.session.commit()
     return render_template("home.html", reccs = reccs, user=current_user)

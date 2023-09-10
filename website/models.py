@@ -4,7 +4,7 @@ from sqlalchemy.sql import func
 
 class Anime(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
+    data = db.Column(db.String(100000000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 

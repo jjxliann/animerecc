@@ -3,6 +3,6 @@ function deleteAnime(animeId){
         method:'POST',
         body:JSON.stringify({animeId: animeId})
     }).then((_res)=>{
-        window.location.href ="/";
+        window.location.href ="/list";
     });
 }

@@ -2,33 +2,26 @@
 
 {% block content%}
 
-<ul class="list-group list-group-flush" id="notes">
-  {% for show in user.anime %}
-  <li class="list-group-item">
-    {{ show.data }}
-    <button type="button" class="close" onClick="deleteNote({{ show.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </li>
-  {% endfor %}
-</ul>
-
-
 
 <h1 align="center">Find Reccomendations</h1>
+{% if reccs == None%}
+<p>No reccomendations</p>
+{% endif %}
+
+
 {% if reccs != None%}
 <form method="POST">
-  {%for recc in reccs%}
+  {%for anime in reccs%}
   
   
   <ul>
     <li>
-  <input type="checkbox" value={{recc}} name="reccName">
-  <label for="anime">{{ recc }}</label>
+  <input type="checkbox" value={{anime}} name="anime">
+  <label for="anime">{{ anime }}</label>
 </li>
 </ul> 
 {% endfor %}
-{% endif %}
 <button type="submit"  class="btn btn-primary">Add to watchlist</button>
 </form>
+{% endif %}
 {% endblock %}

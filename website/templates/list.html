@@ -3,10 +3,10 @@
 {% block content%}
 <h1 align="'center">watchlist</h1>
 <ul class="list-group list-group-flush" id="anime">
-  {% for show in user.anime %}
+  {% for anime in user.anime %}
   <li class="list-group-item">
-    {{ show.data }}
-    <button type="button" class="close" onClick="deleteAnime({{ show.id }})">
+    {{ anime.data }}
+    <button type="button" class="close" onClick="deleteAnime({{ anime.id }})">
       <span aria-hidden="true">&times;</span>
     </button>
   </li>
