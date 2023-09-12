@@ -1,14 +1,17 @@
 {% extends "base.html" %}{% block title %}Changed{% endblock %}  
 
 {% block content%}
-<head></head>
+<head><h1 align="center">You should watch</h1></head>
+<br>
 
 
 <body>
-{{animeName}}
+    <div>
+<h2 style="text-align:center">{{animeName}}</h2>
 <br>
-{{image}}
+<img src="{{image}}" style="text-align:center">
 <br>
-<p>{{synopsis}}</p>
+<p style="text-align:center">{{synopsis}}</p>
+    </div>
 </body>
 {% endblock %}
