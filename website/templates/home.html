@@ -2,11 +2,17 @@
 
 {% block content%}
 
+<h1 align="center">Get Random Reccomendation</h1>
+<br></br>
+      {{randomAnime}}
+<div style="text-align: center; border: 1px transparent">
+  <button type="submit" class="btn btn-primary" onclick={{randomAnime}}>Random Anime</button>
+</div>
 
-<h1 align="center">Find Reccomendations</h1>
-{% if reccs == None%}
-<p>No reccomendations</p>
-{% endif %}
+
+
+<h1 align="center">Reccomendations</h1>
+
 
 
 {% if reccs != None%}
