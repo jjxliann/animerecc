@@ -6,7 +6,7 @@ from .search import search
 from .import db
 from jikanpy import Jikan
 import json
-from .randomFunctions import animeImage, randomAnime,   animeSynopsis
+#from .randomFunctions import animeImage, randomAnime,   animeSynopsis
 
 
 views = Blueprint('views', __name__)
@@ -56,13 +56,45 @@ def watchlist():
 
 @views.route("/random", methods =['GET', 'POST'])
 def random():
-     #animeName = randomAnime()   
-     
-     return render_template("random.html" , 
+    global anime
+    anime  = jikan.random(type='anime')
+
+    def randomAnime():
+        names = anime["data"]["titles"]
+        names = names[0]["title"]
+        return(names)
+    
+    def animeImage():
+        img = anime["data"]["images"]["jpg"]["large_image_url"]
+        return(img)
+    
+    def animeSynopsis():
+        synopsis = anime["data"]["synopsis"]
+        return(synopsis)
+    
+    return render_template("random.html", animeName = randomAnime(), image = animeImage(), synopsis = animeSynopsis(), user = current_user)
+    
+
+    
+
+    
+    
+    
+    
+    
+    """ if request.method =='GET':
         animeName = randomAnime(),
         image = animeImage(),
-        synopsis = animeSynopsis(), 
+        synopsis = animeSynopsis()
+        return render_template("random.html" , 
+        animeName = animeName,
+        image = image,
+        synopsis = synopsis, 
         user = current_user)
+     return("random.html")"""
+    
+
+
         
 
         
