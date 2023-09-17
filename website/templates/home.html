@@ -2,16 +2,27 @@
 
 {% block content%}
 
+<style>
+ #button1{
+      display: inline-block;
+    }
+
+     .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
+
+
 <h1 align="center">Get Random Recommendation</h1>
-<br></br>
-      {{randomAnime}}
-<div style="text-align: center; border: 1px transparent">
-  <button type="submit" class="btn btn-primary" onclick={{randomAnime}}>Random Anime</button>
-</div>
+<a href="{{ url_for('views.random') }}"><button class="btn btn-primary" style="text-align: center;">random</button></a>
+<br>
 
 
-
-<h1 align="center">Recommendation</h1>
+<h2 align="center"> Your Recommendations:</h2>
+<br>
 
 
 
@@ -21,15 +32,19 @@
 <form method="POST">
   {%for anime in reccs%}
   
-  
+ 
+<div class="center">
   <ul>
-    <li>
-  <input type="checkbox" value={{anime}} name="anime">
-  <label for="anime">{{ anime }}</label>
-</li>
-</ul> 
+  <input type="checkbox" value="{{ anime }}" name="anime">
+  <label for="{{anime}}"> {{ anime }}</label> 
+  </ul>
+</div>
 {% endfor %}
-<button type="submit"  class="btn btn-primary">Add to watchlist</button>
 </form>
+
+<div class="center"> 
+<button type="submit"  class="btn btn-primary" >Add to watchlist</button>
+</div>
 {% endif %}
 {% endblock %}
+
