@@ -31,7 +31,7 @@ def home():
          new_anime = Anime(data=anime,user_id=current_user.id)
          db.session.add(new_anime)
          db.session.commit()
-    return render_template("home.html", reccs = reccs, ranndomAnime = randomAnime, user=current_user)
+    return render_template("home.html", reccs = reccs, user=current_user)
    
 
     
@@ -58,7 +58,7 @@ def watchlist():
 def random():
     global anime
     anime  = jikan.random(type='anime')
-
+    
     def randomAnime():
         names = anime["data"]["titles"]
         names = names[0]["title"]
@@ -71,6 +71,14 @@ def random():
     def animeSynopsis():
         synopsis = anime["data"]["synopsis"]
         return(synopsis)
+    
+    if request.method=="POST":
+        animeName = request.form.get('animeRecc')
+        new_anime = Anime(data=animeName,user_id=current_user.id)
+        db.session.add(new_anime)
+        db.session.commit()
+        return render_template("random.html", animeName = randomAnime(), image = animeImage(), synopsis = animeSynopsis(), user = current_user)
+
     
     return render_template("random.html", animeName = randomAnime(), image = animeImage(), synopsis = animeSynopsis(), user = current_user)
     
@@ -106,11 +114,11 @@ def random():
 @views.route('/delete-anime', methods=['POST'])
 def delete_anime():
     anime = json.loads(request.data)
-    animeId = anime['anime']
+    animeId = anime['animeId']
     anime = Anime.query.get(animeId)
     if anime:
         if anime.user_id == current_user.id:
             db.session.delete(anime)
             db.session.commit()
-            return jsonify({})
+    return jsonify({})
 

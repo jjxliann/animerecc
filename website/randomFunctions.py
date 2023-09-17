@@ -23,5 +23,7 @@ def animeSynopsis():
 
 
 
+
+
 """print(names)
 print(names[0]['title'])"""

@@ -1,17 +1,36 @@
 {% extends "base.html" %}{% block title %}Changed{% endblock %}  
 
 {% block content%}
-<head><h1 align="center">You should watch</h1></head>
+<head><h1 align="center">You should watch:</h1></head>
 <br>
 
+<style>
+    #button1 , #button2{
+      display: inline-block;
+    }
+
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+  </style>
 
 <body>
-    <div>
+    <div class="container">
 <h2 style="text-align:center">{{animeName}}</h2>
 <br>
-<img src="{{image}}" style="text-align:center">
+<img src="{{image}}" class="center">
 <br>
 <p style="text-align:center">{{synopsis}}</p>
-    </div>
+
+<div class="text-center">
+<form method="POST">
+<button class="btn btn-primary" id="button1" name="animeRecc" type="submit" value="{{animeName}}">Add to watchlist</button>
+</form>
+<a href="{{ url_for('views.random') }}"><button class="btn btn-primary" id="button2" >New Recommendation</button></a>
+</div>    
+</div>
 </body>
 {% endblock %}
