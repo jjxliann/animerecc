@@ -1,9 +1,39 @@
 {% extends "base.html" %} {% block title %}serch{% endblock %}  
 
 {%block content%}
+<style>
+     h1,h2,h3{
+        font-family:"Montserrat",sans-serif ;
+    }
+    p,label{
+        font-family:"Hind",sans-serif ;
+        padding: 25px;
+        font-size: large;
+    }
+    .div{
+      padding: 15px;
+        display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+    }
+</style>
+<head>
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Hind">
 
+  <h1 class="div">Search</h1>
+  <p>Please enter the name of the show you want to find in all lowercase, the names can be finnecky depending on the show so you might have to try the english translated name and the romanji name.</p> 
+  <p>Ex: if you want to find attack on titan try "attack on titan" or "shingeki no kyojin"</p>
+</head>
 <form method="POST" action="serch">
+  <body>
+    <div class="div">
     <input type="text" id="animeName" name="anime" placeholder="enter anime">
-    <input type="submit">
+    <button type="submit" class="btn btn-dark">Search</button>
+    </div>
+  </body>
 </form>
 {% endblock %}

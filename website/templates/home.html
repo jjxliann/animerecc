@@ -2,38 +2,52 @@
 
 {% block content%}
 
-<style>
- #button1{
-      display: inline-block;
-    }
 
-     .center {
-  display: block;
+
+<head class="head">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+
+<style>
+   h1,h2,h3{
+        font-family:"Montserrat",sans-serif ;
+    }
+    p,label{
+        font-family:"Hind",sans-serif ;
+    }
+    .div{
+        padding: 15px;
+        display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+    }
+    #wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+ 
 </style>
 
-
+<div class="div">
 <h1 align="center">Get Random Recommendation</h1>
-<a href="{{ url_for('views.random') }}"><button class="btn btn-primary" style="text-align: center;">random</button></a>
+<a href="{{ url_for('views.random') }}" id="wrapper"><button class="btn btn-dark" id="wrapper"  >random</button></a>
+</div>
+
 <br>
 
-
+<div class="div">
 <h2 align="center"> Your Recommendations:</h2>
 <br>
-
-
-
-
+</div>
+</head>
 
 {% if reccs != None%}
 <form method="POST">
   {%for anime in reccs%}
   
  
-<div class="center">
+<div class="div">
   <ul>
   <input type="checkbox" value="{{ anime }}" name="anime">
   <label for="{{anime}}"> {{ anime }}</label> 
@@ -42,8 +56,8 @@
 {% endfor %}
 </form>
 
-<div class="center"> 
-<button type="submit"  class="btn btn-primary" >Add to watchlist</button>
+<div class="div"> 
+<button type="submit"  class="btn btn-dark" >Add to watchlist</button>
 </div>
 {% endif %}
 {% endblock %}

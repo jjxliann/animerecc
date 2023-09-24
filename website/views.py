@@ -28,8 +28,11 @@ def home():
         
          anime = request.form.get('anime')
          print(request.form.getlist('anime'))
-         new_anime = Anime(data=anime,user_id=current_user.id)
-         db.session.add(new_anime)
+         for anime in anime:
+            if anime == None:
+                continue
+            new_anime = Anime(data=anime,user_id=current_user.id)
+            db.session.add(new_anime)
          db.session.commit()
     return render_template("home.html", reccs = reccs, user=current_user)
    
@@ -72,7 +75,7 @@ def random():
         synopsis = anime["data"]["synopsis"]
         return(synopsis)
     
-    if request.method=="POST":
+    if request.method=="POST" and request.form.get('animeRecc') != None:
         animeName = request.form.get('animeRecc')
         new_anime = Anime(data=animeName,user_id=current_user.id)
         db.session.add(new_anime)
